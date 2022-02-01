@@ -5,3 +5,5 @@ tarpaulin-report.html
 tarpaulin-report.json
 /target
 Cargo.lock
+composer.lock
+composer.json

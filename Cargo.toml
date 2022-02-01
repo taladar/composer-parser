@@ -1,6 +1,6 @@
 [package]
 name = "composer-parser"
-description = "Parses the JSON output of composer outdated and composer audit"
+description = "Parses the JSON output of composer outdated"
 readme = "README.md"
 license = "MIT/Apache-2.0"
 version = "0.1.0"
@@ -21,11 +21,19 @@ debug = true
 [dependencies.thiserror]
 version = "~1.0"
 
-[dependencies.futures]
-version = "~0.3"
-
 [dependencies.tracing]
 version = "~0.1"
+
+[dependencies.clap]
+version = "~3.0"
+features = ["derive", "cargo"]
+
+[dependencies.serde]
+version = "~1.0"
+features = ["derive"]
+
+[dependencies.serde_json]
+version = "~1.0"
 
 [dev-dependencies.pretty_assertions]
 version = "~1.0"
