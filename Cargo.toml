@@ -4,9 +4,11 @@ description = "Parses the JSON output of composer outdated"
 readme = "README.md"
 license = "MIT/Apache-2.0"
 version = "0.1.0"
-authors = ["Matthias Hörmann <taladar@taladar.net>"]
+authors = ["Matthias Hörmann <mhoermann@gmail.com>"]
 edition = "2021"
-publish = false
+repository = "https://github.com/taladar/composer-parser"
+categories = [ "parser-implementations" ]
+keywords = [ "composer", "composer-outdated", "php" ]
 
 exclude = [ ".env", "tarpaulin-report.html", "tarpaulin-report.json" ]
 
