@@ -59,7 +59,7 @@ pub struct ComposerOutdatedOptions {
 }
 
 /// Outer structure for parsing composer-outdated output
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct ComposerOutdatedData {
     /// Since we call composer oudated with --locked it returns all package
     /// information in this field
@@ -67,7 +67,7 @@ pub struct ComposerOutdatedData {
 }
 
 /// Inner, per-package structure when parsing composer-outdated output
-#[derive(Debug, serde::Deserialize)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct PackageStatus {
     /// Package name
     pub name: String,
@@ -85,7 +85,7 @@ pub struct PackageStatus {
 }
 
 /// What kind of update, if any, is required for a package
-#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, serde::Deserialize)]
+#[derive(Debug, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum UpdateRequirement {
     /// No update is required
@@ -96,13 +96,42 @@ pub enum UpdateRequirement {
     UpdatePossible,
 }
 
+impl std::fmt::Display for UpdateRequirement {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            UpdateRequirement::UpToDate => {
+                write!(f, "up-to-date")
+            }
+            UpdateRequirement::SemverSafeUpdate => {
+                write!(f, "semver-safe-update")
+            }
+            UpdateRequirement::UpdatePossible => {
+                write!(f, "update-possible")
+            }
+        }
+    }
+}
+
 /// What the exit code indicated about required updates
-#[derive(Debug, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum IndicatedUpdateRequirement {
     /// No update is required
     UpToDate,
     /// An update is required
     UpdateRequired,
+}
+
+impl std::fmt::Display for IndicatedUpdateRequirement {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            IndicatedUpdateRequirement::UpToDate => {
+                write!(f, "up-to-date")
+            }
+            IndicatedUpdateRequirement::UpdateRequired => {
+                write!(f, "update-required")
+            }
+        }
+    }
 }
 
 /// main entry point for the composer-oudated call
