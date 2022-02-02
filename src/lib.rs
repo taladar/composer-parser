@@ -96,10 +96,19 @@ pub enum UpdateRequirement {
     UpdatePossible,
 }
 
+/// What the exit code indicated about required updates
+#[derive(Debug, PartialEq, Eq, serde::Deserialize)]
+pub enum IndicatedUpdateRequirement {
+    /// No update is required
+    UpToDate,
+    /// An update is required
+    UpdateRequired,
+}
+
 /// main entry point for the composer-oudated call
 pub fn outdated(
     options: &ComposerOutdatedOptions,
-) -> Result<(Vec<UpdateRequirement>, ComposerOutdatedData), Error> {
+) -> Result<(IndicatedUpdateRequirement, ComposerOutdatedData), Error> {
     let mut cmd = Command::new("composer");
 
     cmd.args([
@@ -130,14 +139,14 @@ pub fn outdated(
     }
 
     let update_requirement = if output.status.success() {
-        UpdateRequirement::UpdatePossible
+        IndicatedUpdateRequirement::UpdateRequired
     } else {
-        UpdateRequirement::UpToDate
+        IndicatedUpdateRequirement::UpToDate
     };
 
     let json_str = from_utf8(&output.stdout)?;
     let data: ComposerOutdatedData = serde_json::from_str(json_str)?;
-    Ok((vec![update_requirement], data))
+    Ok((update_requirement, data))
 }
 
 #[cfg(test)]
