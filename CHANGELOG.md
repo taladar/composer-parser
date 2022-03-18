@@ -1,3 +1,9 @@
+## 0.1.3
+
+### Fixed
+
+Fixes to build with new clap
+
 ## 0.1.2
 
 ### Fixed
