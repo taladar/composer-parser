@@ -2,7 +2,7 @@
 name = "composer-parser"
 description = "Parses the JSON output of composer outdated"
 readme = "README.md"
-license = "MIT/Apache-2.0"
+license = "MIT OR Apache-2.0"
 version = "0.1.3"
 authors = ["Matthias Hörmann <mhoermann@gmail.com>"]
 edition = "2021"
