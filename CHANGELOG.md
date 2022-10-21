@@ -1,3 +1,9 @@
+## 0.1.4
+
+Fix SPDX license expression
+Update pretty_assertions to version without unmaintained dependencies
+Update dependencies
+
 ## 0.1.3
 
 ### Fixed
