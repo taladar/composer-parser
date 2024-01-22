@@ -2,7 +2,8 @@
 #![deny(renamed_and_removed_lints)]
 #![forbid(unsafe_code)]
 #![deny(deprecated)]
-#![forbid(private_in_public)]
+#![forbid(private_interfaces)]
+#![forbid(private_bounds)]
 #![forbid(non_fmt_panics)]
 #![deny(unreachable_code)]
 #![deny(unreachable_patterns)]
@@ -51,7 +52,6 @@ pub struct ComposerOutdatedOptions {
         short = 'i',
         long = "ignore",
         value_name = "PACKAGE_NAME",
-        multiple_occurrences = true,
         number_of_values = 1,
         help = "Dependencies that should be ignored"
     )]
