@@ -1,3 +1,7 @@
+## 0.2.1
+
+update clap dependency
+
 ## 0.2.0
 
 update dependencies including some incompatible ones

@@ -3,7 +3,7 @@ name = "composer-parser"
 description = "Parses the JSON output of composer outdated"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Matthias Hörmann <mhoermann@gmail.com>"]
 edition = "2021"
 repository = "https://github.com/taladar/composer-parser"
@@ -27,7 +27,7 @@ version = "~1.0"
 version = "~0.1"
 
 [dependencies.clap]
-version = "~4.4"
+version = "~4.5"
 features = ["derive", "cargo"]
 
 [dependencies.serde]
