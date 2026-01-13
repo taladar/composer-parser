@@ -1,25 +1,3 @@
-#![deny(unknown_lints)]
-#![deny(renamed_and_removed_lints)]
-#![forbid(unsafe_code)]
-#![deny(deprecated)]
-#![forbid(private_interfaces)]
-#![forbid(private_bounds)]
-#![forbid(non_fmt_panics)]
-#![deny(unreachable_code)]
-#![deny(unreachable_patterns)]
-#![forbid(unused_doc_comments)]
-#![forbid(unused_must_use)]
-#![deny(while_true)]
-#![deny(unused_parens)]
-#![deny(redundant_semicolons)]
-#![deny(non_ascii_idents)]
-#![deny(confusable_idents)]
-#![warn(missing_docs)]
-#![warn(clippy::missing_docs_in_private_items)]
-#![warn(clippy::cargo_common_metadata)]
-#![warn(rustdoc::missing_crate_level_docs)]
-#![deny(rustdoc::broken_intra_doc_links)]
-#![warn(missing_debug_implementations)]
 #![doc = include_str!("../README.md")]
 
 use thiserror::Error;
@@ -61,7 +39,7 @@ pub struct ComposerOutdatedOptions {
 /// Outer structure for parsing composer-outdated output
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct ComposerOutdatedData {
-    /// Since we call composer oudated with --locked it returns all package
+    /// Since we call composer outdated with --locked it returns all package
     /// information in this field
     pub locked: Vec<PackageStatus>,
 }
@@ -78,9 +56,9 @@ pub struct PackageStatus {
     /// Is an update required and if so, is it semver-compatible or not
     #[serde(rename = "latest-status")]
     pub latest_status: UpdateRequirement,
-    /// Decsription for the package
+    /// Description for the package
     pub description: String,
-    /// Further notes, e.g. if a package has been abandonded
+    /// Further notes, e.g. if a package has been abandoned
     pub warning: Option<String>,
 }
 
@@ -99,13 +77,13 @@ pub enum UpdateRequirement {
 impl std::fmt::Display for UpdateRequirement {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            UpdateRequirement::UpToDate => {
+            Self::UpToDate => {
                 write!(f, "up-to-date")
             }
-            UpdateRequirement::SemverSafeUpdate => {
+            Self::SemverSafeUpdate => {
                 write!(f, "semver-safe-update")
             }
-            UpdateRequirement::UpdatePossible => {
+            Self::UpdatePossible => {
                 write!(f, "update-possible")
             }
         }
@@ -124,17 +102,21 @@ pub enum IndicatedUpdateRequirement {
 impl std::fmt::Display for IndicatedUpdateRequirement {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            IndicatedUpdateRequirement::UpToDate => {
+            Self::UpToDate => {
                 write!(f, "up-to-date")
             }
-            IndicatedUpdateRequirement::UpdateRequired => {
+            Self::UpdateRequired => {
                 write!(f, "update-required")
             }
         }
     }
 }
 
-/// main entry point for the composer-oudated call
+/// main entry point for the composer-outdated call
+///
+/// # Errors
+///
+/// fails if the call to composer outdated fails or the output can not be parsed
 pub fn outdated(
     options: &ComposerOutdatedOptions,
 ) -> Result<(IndicatedUpdateRequirement, ComposerOutdatedData), Error> {
@@ -184,7 +166,7 @@ mod test {
     //use pretty_assertions::{assert_eq, assert_ne};
 
     /// this test requires a composer.json and composer.lock in the main crate
-    /// directory (working dir of the tests)
+    /// directory (working dir of the tests) and a composer command in PATH
     #[test]
     fn test_run_composer_outdated() -> Result<(), Error> {
         outdated(&ComposerOutdatedOptions {
