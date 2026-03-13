@@ -17,7 +17,7 @@ exclude = [".env", "tarpaulin-report.html", "tarpaulin-report.json"]
 [dependencies]
 
 [dependencies.clap]
-version = "~4.5"
+version = "~4.6"
 features = ["derive", "cargo"]
 
 [dependencies.serde]
