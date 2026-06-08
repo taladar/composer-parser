@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.6 - 2026-06-08 11:53:16Z
+
+### ⚙️ Miscellaneous Tasks
+
+- *(template)* Sync configs with latest rust-templates and ggh standards
+- *(template)* Sync .gitignore and release.sh with latest lib template
+- *(dependencies)* Update dependencies
+
 ## 0.2.5 - 2026-03-13 08:54:05Z
 
 ### ⚙️ Miscellaneous Tasks
